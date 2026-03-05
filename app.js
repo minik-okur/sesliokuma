@@ -156,12 +156,18 @@ function mikrofoniSerbest(){SpeechController.stopAll();mikIzniAlindi=false;}
 // ══════════════════════════════════════════════════════════════════════════════
 const menuScreen=document.getElementById('menuScreen'),gameContainer=document.getElementById('gameContainer'),koyunScreen=document.getElementById('koyunScreen'),kelimeDunyaScreen=document.getElementById('kelimeDunyaScreen'),oyunKoseScreen=document.getElementById('oyunKoseScreen'),balonScreen=document.getElementById('balonScreen'),uzayScreen=document.getElementById('uzayScreen'),hazineScreen=document.getElementById('hazineScreen'),hafizaScreen=document.getElementById('hafizaScreen'),yapbozScreen=document.getElementById('yapbozScreen'),betaModalOverlay=document.getElementById('betaModalOverlay'),betaDevamBtn=document.getElementById('betaDevamBtn'),betaGeriBtn=document.getElementById('betaGeriBtn');
 
-const TUM_EKRANLAR=[menuScreen,gameContainer,koyunScreen,kelimeDunyaScreen,oyunKoseScreen,balonScreen,uzayScreen,hazineScreen,hafizaScreen,yapbozScreen];
+const okumaKoseScreen=document.getElementById('okumaKoseScreen');
+const soSecimEkrani=document.getElementById('soSecimEkrani');
+const soGeriSayimEkrani=document.getElementById('soGeriSayimEkrani');
+const soOkumaEkrani=document.getElementById('soOkumaEkrani');
+const soSonucEkrani=document.getElementById('soSonucEkrani');
+window.okumaKoseScreen=okumaKoseScreen;
+const TUM_EKRANLAR=[menuScreen,gameContainer,koyunScreen,kelimeDunyaScreen,oyunKoseScreen,okumaKoseScreen,soSecimEkrani,soGeriSayimEkrani,soOkumaEkrani,soSonucEkrani,balonScreen,uzayScreen,hazineScreen,hafizaScreen,yapbozScreen];
 function tumEkranlariGizle(){TUM_EKRANLAR.forEach(el=>{if(el)el.style.display='none';});}
 function ekranGoster(el){tumEkranlariGizle();if(el){el.style.display='';el.classList.remove('fade-in');void el.offsetWidth;el.classList.add('fade-in');}menuSkorGuncelle();}
 
 // Ana menü kart butonları
-document.querySelectorAll('.menu-card-btn').forEach(btn=>{btn.addEventListener('click',function(e){e.stopPropagation();const mod=this.dataset.mod;if(!mod)return;if(mod==='kelime-dunya'){ekranGoster(kelimeDunyaScreen);}else if(mod==='hikaye'){if(window.hikayeSecimBas)window.hikayeSecimBas();else ekranGoster(menuScreen);}else if(mod==='oyun-kose'){ekranGoster(oyunKoseScreen);}else if(mod==='sesli'){betaModalAc();}});});
+document.querySelectorAll('.menu-card-btn').forEach(btn=>{btn.addEventListener('click',function(e){e.stopPropagation();const mod=this.dataset.mod;if(!mod)return;if(mod==='kelime-dunya'){ekranGoster(kelimeDunyaScreen);}else if(mod==='hikaye'){if(window.hikayeSecimBas)window.hikayeSecimBas();else ekranGoster(menuScreen);}else if(mod==='oyun-kose'){ekranGoster(oyunKoseScreen);}else if(mod==='okuma-kose'){ekranGoster(okumaKoseScreen);}});});
 
 // Kelime Dünyası alt menü — DÜZELTME: koyunScreen açılmıyor, doğrudan kelimeOyunuBas
 document.getElementById('smKelimeOyunu').addEventListener('click',()=>{tumEkranlariGizle();if(window.kelimeOyunuBas)window.kelimeOyunuBas();});
@@ -176,6 +182,9 @@ document.getElementById('smKelimeYapbozu').addEventListener('click',()=>{ekranGo
 // Geri butonları
 document.getElementById('btnKelimeDunyaBack').addEventListener('click',()=>ekranGoster(menuScreen));
 document.getElementById('btnOyunKoseBack').addEventListener('click',()=>ekranGoster(menuScreen));
+document.getElementById('btnOkumaKoseBack').addEventListener('click',()=>ekranGoster(menuScreen));
+document.getElementById('smSesliOkuma').addEventListener('click',()=>{betaModalAc();});
+document.getElementById('smSureliOkuma').addEventListener('click',()=>{tumEkranlariGizle();if(window.surelioOkumaBas)window.surelioOkumaBas();});
 document.getElementById('btnBack').addEventListener('click',()=>{mikrofoniSerbest();ekranGoster(menuScreen);});
 document.getElementById('btnKoyunBack').addEventListener('click',()=>{if(window.kelimeOyunuDurdur)window.kelimeOyunuDurdur();else ekranGoster(menuScreen);});
 document.getElementById('btnBalonBack').addEventListener('click',()=>{if(window.balonDurdur)window.balonDurdur();ekranGoster(kelimeDunyaScreen);});

@@ -116,21 +116,17 @@
       <button class="menu-card-btn menu-card-btn--green" data-mod="oyun-kose">Oyun Köşesi</button>
     </div>
 
-    <!-- 🎤 Sesli Okuma (⚡) — EN SONDA -->
+    <!-- 📖 Okuma Köşesi -->
     <div class="menu-card menu-card--sesli" id="menuCardSesli">
-      <div class="menu-card-label-top">
-        Sesli Okuma
-        <span class="⚡-badge">⚡</span>
-      </div>
+      <div class="menu-card-label-top">Okuma Köşesi</div>
       <div class="menu-card-art">
-        <span class="menu-card-emoji">🎤</span>
+        <span class="menu-card-emoji">📖</span>
         <div class="menu-card-deco">
-          <span>✔️</span><span>❓</span><span>✔️</span>
+          <span>🎤</span><span>⏱️</span><span>⭐</span>
         </div>
       </div>
-      <button class="menu-card-btn menu-card-btn--orange" data-mod="sesli">
-        Sesli Okuma
-        <span class="⚡-badge">⚡</span>
+      <button class="menu-card-btn menu-card-btn--orange" data-mod="okuma-kose">
+        Okuma Köşesi
       </button>
     </div>
 
@@ -215,6 +211,118 @@
   </div>
 
 </div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     OKUMA KÖŞESİ ALT MENÜ EKRANI
+     ═══════════════════════════════════════════════════════════ -->
+<div class="submenu-screen" id="okumaKoseScreen" style="display:none">
+  <div class="submenu-topbar">
+    <button class="btn-back" id="btnOkumaKoseBack">← Menü</button>
+    <span class="submenu-title">📖 Okuma Köşesi</span>
+  </div>
+  <div class="submenu-cards">
+    <div class="submenu-card submenu-card--sesli-okuma" id="smSesliOkuma">
+      <span class="submenu-card-emoji">🎤</span>
+      <div class="submenu-card-name">Sesli Okuma</div>
+      <div class="submenu-card-desc">Mikrofon ile oku</div>
+    </div>
+    <div class="submenu-card submenu-card--sureli-okuma" id="smSureliOkuma">
+      <span class="submenu-card-emoji">⏱️</span>
+      <div class="submenu-card-name">Süreli Okuma</div>
+      <div class="submenu-card-desc">60 saniyede oku</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SÜRELİ OKUMA — EKRANLAR
+     ═══════════════════════════════════════════════════════════ -->
+<div class="so-ekran" id="soSecimEkrani" style="display:none">
+  <div class="so-topbar">
+    <button class="btn-back" id="soBtnSecimGeri">← Geri</button>
+    <span class="so-baslik">Süreli Okuma ⏱️</span>
+  </div>
+  <div class="so-metin-grid" id="soMetinKartlari"></div>
+</div>
+
+<div class="so-ekran so-ekran--geri" id="soGeriSayimEkrani" style="display:none">
+  <div class="so-geri-rakam" id="soGeriSayimRakam">3</div>
+</div>
+
+<div class="so-ekran so-ekran--okuma" id="soOkumaEkrani" style="display:none">
+  <div class="so-okuma-ust">
+    <button class="btn-back so-back-kucuk" id="soBtnOkumaGeri">← Geri</button>
+    <div class="so-timer-wrap">
+      <div class="so-timer-bar-bg">
+        <div class="so-timer-bar" id="soTimerBar"></div>
+      </div>
+      <div class="so-timer-sayac" id="soTimerSayac">1:00</div>
+    </div>
+  </div>
+  <div class="so-metin-alan" id="soMetinAlan"></div>
+  <button class="so-btn-basla" id="soBtnBasla">▶ Başla</button>
+</div>
+
+<div class="so-ekran so-ekran--sonuc" id="soSonucEkrani" style="display:none">
+  <div class="so-sonuc-kart">
+    <div class="so-sonuc-ikon">⏱️</div>
+    <div class="so-sonuc-baslik">Süren doldu!</div>
+    <div class="so-sonuc-alt">Son okuduğun kelimeyi seç:</div>
+    <select class="so-kelime-secici" id="soKelimeSecici"></select>
+    <div class="so-sonuc-metin" id="soSonucMetin"></div>
+    <div class="so-sonuc-butonlar">
+      <button class="so-btn so-btn--tekrar" id="soBtnTekrar">🔄 Tekrar Dene</button>
+      <button class="so-btn so-btn--geri" id="soBtnSecimedön">📋 Metin Seç</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.submenu-card--sesli-okuma { background: linear-gradient(135deg, #FF8C00, #ffaa44); }
+.submenu-card--sureli-okuma { background: linear-gradient(135deg, #e05c00, #FF8C00); }
+.so-ekran {
+  position: fixed; inset: 0;
+  background: linear-gradient(180deg, #87CEEB 0%, #a8e6a3 100%);
+  display: none; flex-direction: column; align-items: center;
+  overflow: hidden; z-index: 100; font-family: 'Nunito', sans-serif;
+  max-width: 480px; margin: 0 auto; left: 0; right: 0;
+}
+.so-topbar { width: 100%; display: flex; align-items: center; padding: 12px 16px 8px; gap: 12px; flex-shrink: 0; }
+.so-baslik { font-family: 'Fredoka One','Baloo 2',cursive; font-size: 1.3rem; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+.so-metin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 12px 16px; width: 100%; box-sizing: border-box; flex: 1; align-content: center; }
+.so-metin-kart { background: rgba(255,255,255,0.92); border-radius: 18px; padding: 16px 12px; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.12); border: 3px solid transparent; transition: transform 0.15s,border-color 0.15s; -webkit-tap-highlight-color: transparent; }
+.so-metin-kart:active { transform: scale(0.96); border-color: #FF8C00; }
+.so-kart-baslik { font-family: 'Fredoka One','Baloo 2',cursive; font-size: 1rem; color: #333; text-align: center; }
+.so-kart-kelime { font-size: 0.82rem; color: #FF8C00; font-weight: 700; }
+.so-kart-yildizlar { font-size: 0.85rem; color: #FF8C00; letter-spacing: 1px; }
+.so-ekran--geri { justify-content: center; }
+.so-geri-rakam { font-family: 'Fredoka One','Baloo 2',cursive; font-size: 8rem; color: #fff; text-shadow: 0 6px 24px rgba(0,0,0,0.25); line-height: 1; }
+@keyframes soGeriPop { 0%{transform:scale(1.5);opacity:0} 40%{transform:scale(0.95);opacity:1} 100%{transform:scale(1);opacity:1} }
+.so-geri-animate { animation: soGeriPop 0.45s cubic-bezier(.34,1.56,.64,1) forwards; }
+.so-ekran--okuma { justify-content: flex-start; }
+.so-okuma-ust { width: 100%; display: flex; align-items: center; padding: 10px 12px 6px; gap: 10px; flex-shrink: 0; }
+.so-back-kucuk { flex-shrink: 0; font-size: 0.82rem; padding: 6px 10px; }
+.so-timer-wrap { flex: 1; display: flex; align-items: center; gap: 8px; }
+.so-timer-bar-bg { flex: 1; height: 14px; background: rgba(255,255,255,0.4); border-radius: 99px; overflow: hidden; }
+.so-timer-bar { height: 100%; width: 100%; background: linear-gradient(90deg,#ff4444,#ff8844); border-radius: 99px; }
+.so-timer-sayac { font-family: 'Fredoka One','Baloo 2',cursive; font-size: 1rem; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.3); min-width: 36px; text-align: right; }
+.so-metin-alan { flex: 1; padding: 12px 18px; line-height: 2.1; color: #1a3a1a; text-align: justify; overflow: hidden; width: 100%; box-sizing: border-box; }
+.so-kelime-wrap { display: inline-flex; flex-direction: column; align-items: center; vertical-align: bottom; margin-bottom: 2px; }
+.so-kelime { font-family: 'Nunito',sans-serif; font-weight: 700; color: #1a3a1a; }
+.so-kelime-num { font-size: 0.52rem; color: rgba(0,0,0,0.28); line-height: 1; margin-top: -2px; font-family: 'Nunito',sans-serif; }
+.so-btn-basla { flex-shrink: 0; margin: 8px auto 14px; background: linear-gradient(135deg,#FF8C00,#ffaa44); color: #fff; border: none; border-radius: 99px; font-family: 'Fredoka One','Baloo 2',cursive; font-size: 1.2rem; padding: 14px 40px; cursor: pointer; box-shadow: 0 4px 16px rgba(255,140,0,0.4); -webkit-tap-highlight-color: transparent; }
+.so-ekran--sonuc { justify-content: center; }
+.so-sonuc-kart { background: rgba(255,255,255,0.95); border-radius: 24px; padding: 28px 24px; margin: 16px; display: flex; flex-direction: column; align-items: center; gap: 14px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); width: calc(100% - 32px); box-sizing: border-box; }
+.so-sonuc-ikon { font-size: 3rem; }
+.so-sonuc-baslik { font-family: 'Fredoka One','Baloo 2',cursive; font-size: 1.6rem; color: #FF8C00; }
+.so-sonuc-alt { font-size: 0.95rem; color: #555; text-align: center; }
+.so-kelime-secici { width: 100%; padding: 12px 14px; border: 2px solid #FF8C00; border-radius: 12px; font-family: 'Nunito',sans-serif; font-size: 1rem; color: #333; background: #fff; outline: none; cursor: pointer; }
+.so-sonuc-metin { font-family: 'Fredoka One','Baloo 2',cursive; font-size: 1.1rem; color: #333; text-align: center; min-height: 1.5rem; transition: opacity 0.3s; }
+.so-sonuc-butonlar { display: flex; gap: 10px; width: 100%; }
+.so-btn { flex: 1; border: none; border-radius: 99px; font-family: 'Nunito',sans-serif; font-weight: 800; font-size: 0.92rem; padding: 12px 8px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.so-btn--tekrar { background: linear-gradient(135deg,#FF8C00,#ffaa44); color: #fff; box-shadow: 0 3px 12px rgba(255,140,0,0.35); }
+.so-btn--geri { background: #f0f0f0; color: #555; }
+</style>
 
 <!-- ═══════════════════════════════════════════════════════════
      ⚡ Okumanı duymam için mikrofonu aç
@@ -470,7 +578,6 @@
   var overlay  = document.getElementById('hmenuOverlay');
   var btnOpen  = document.getElementById('hamburgerBtn');
   var btnClose = document.getElementById('hmenuClose');
-  var toggle   = document.getElementById('hmSesToggle');
   var label    = document.getElementById('hmSesLabel');
   var sesAcik  = true;
 
@@ -480,9 +587,10 @@
 
   document.getElementById('hmSes').addEventListener('click', function(){
     sesAcik = !sesAcik;
-    toggle.classList.toggle('off', !sesAcik);
     label.textContent = sesAcik ? 'Ses Açık' : 'Ses Kapalı';
     if(window.speechSynthesis) window.speechSynthesis.cancel();
+    // Ses yöneticisini sustur/aç
+    if(window.setSesAcik) window.setSesAcik(sesAcik);
   });
 })();
 </script>
@@ -559,6 +667,7 @@
 })();
 </script>
 
+<script src="ses-yonetici.js"></script>
 <script src="hikaye.js"></script>
 <script src="hikaye-secim.js"></script>
 <script src="app.js"></script>
@@ -568,6 +677,7 @@
 <script src="hazine.js"></script>
 <script src="hafiza.js"></script>
 <script src="yapboz.js"></script>
+<script src="sureli-okuma.js"></script>
    <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
